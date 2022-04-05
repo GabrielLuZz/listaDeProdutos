@@ -26,3 +26,22 @@ input.addEventListener('keyup', (e) => {
         PesquisarProduto(e);
     }
 })
+
+abrirCarrinho.addEventListener('click', () => {
+    areaCarrinho.classList.add('carrinhoAberto');
+    abrirCarrinho.classList.remove('aparece');
+
+})
+
+minimizador.addEventListener('click', () => {
+    areaCarrinho.classList.toggle('carrinhoAberto')
+
+    if (carrinho.length > 0 && !areaCarrinho.classList.contains('carrinhoAberto')) {
+        setTimeout(() => {
+            abrirCarrinho.classList.add('aparece');
+        }, 2000)
+
+    } else {
+        abrirCarrinho.classList.remove('aparece');
+    }
+})

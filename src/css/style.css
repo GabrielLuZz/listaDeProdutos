@@ -247,6 +247,16 @@ nav ul li {
     cursor: pointer;
 }
 
+.abrir {
+    width: 35px;
+    display: none;
+    cursor: pointer;
+}
+
+.abrir img {
+    width: 100%;
+}
+
 .carrinho {
     width: 4px;
     background-color: #12B886;
@@ -366,6 +376,7 @@ nav ul li {
 .info button:hover {
     color: #6B54DE;
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .acoes {
@@ -467,4 +478,8 @@ nav ul li {
     font-size: 16px;
     line-height: 16px;
     color: #212529;
+}
+
+.aparece {
+    display: block;
 }
