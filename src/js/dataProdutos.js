@@ -1,82 +1,57 @@
-const produtos = [
+const produtos = [{
+        nome: 'Morango 5kg',
+        preco: 7,
+        secao: 'Hortifruit',
+        categoria: 'Fruta',
+        img: "./src/img/morango.png"
+    },
     {
-        id: 1,
         nome: 'Banana',
-        preco: '2.00',
-        secao: 'Hortifruti',
-        categoria: 'fruta',
-        img: "./src/img/banana.png",
-        promocao: true,
-        precoPromocao: '1.00',
-        componentes: [
-            'Potássio',
-            'Vitamina B6',
-            'Vitamina C',
-            'Folatos'
-        ] 
+        preco: 4,
+        secao: 'Hortifruit',
+        categoria: 'Fruta',
+        img: './src/img/banana.png'
     },
     {
-        id: 2,
-        nome: 'Morango',
-        preco: '2.00',
-        secao: 'Hortifruti',
-        categoria: 'fruta',
-        img: './src/img/morango.png',
-        promocao: false,
-        precoPromocao: '0',
-        componentes: [
-            'Fibras',
-            'Vitamina C',
-            'Cálcio',
-            'Ferro'
-        ] 
+        nome: 'Yorgut de Morango',
+        preco: 3,
+        secao: 'Laticínios',
+        categoria: 'Yorgut',
+        img: './src/img/yorgut.png'
     },
     {
-        id: 3,
-        nome: 'Maçã',
-        preco: '2.00',
-        secao: 'Hortifruti',
-        categoria: 'fruta',
-        img: './src/img/maça.png',
-        promocao: true,
-        precoPromocao: '1.50',
-        componentes: [
-            'Potássio',
-            'Vitamina A',
-            'Vitamina E',
-            'Vitamina C'
-        ] 
-    },
-    {
-        id: 4,
         nome: 'Pão',
-        preco: '4.00',
+        preco: 5,
         secao: 'Panificadora',
-        categoria: 'Pães',
-        img: './src/img/pao.png',
-        promocao: true,
-        precoPromocao: '2.50',
-        componentes: [
-            'Cálcio',
-            'Sódio',
-            'Fibra Alimentar',
-            'Proteínas'
-        ] 
+        categoria: 'Pão',
+        img: './src/img/pao.png'
     },
     {
-        id: 5,
         nome: 'Leite',
-        preco: '5.00',
-        secao: 'Laticinio',
+        preco: 7,
+        secao: 'Laticínios',
         categoria: 'Leite',
-        img: './src/img/leite.png',
-        promocao: false,
-        precoPromocao: '1.00',
-        componentes: [
-            'Carboidratos',
-            'Proteínas',
-            'Gorduras totais'
-        ] 
+        img: './src/img/leite.png'
     },
-    
+    {
+        nome: 'Bolo',
+        preco: 10,
+        secao: 'Panificadora',
+        categoria: 'Doce',
+        img: "./src/img/bolo.png"
+    },
+    {
+        nome: 'Torta Maçã',
+        preco: 4,
+        secao: 'Hortifruit',
+        categoria: 'Doce',
+        img: "./src/img/torta.png"
+    },
+    {
+        nome: 'Maçã',
+        preco: 4,
+        secao: 'Hortifruit',
+        categoria: 'Fruta',
+        img: "./src/img/maca.png"
+    }
 ]
