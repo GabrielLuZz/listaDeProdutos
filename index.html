@@ -1,54 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" href="./src/css/reset.css">
     <link rel="stylesheet" href="./src/css/style.css">
-
-    <title>Lista de Produtos - Continuação</title>
+    <title>Lista de Produtos</title>
 </head>
+
 <body>
 
-    <!-- CABEÇALHO -->
     <header>
-        <div id="filters" class="filtersContainer">
-            
-            <button class="estiloGeralBotoes estiloGeralBotoes--mostrarTodos">Mostrar Todos</button>
-            <button class="estiloGeralBotoes estiloGeralBotoes--filtrarHortifruti">Mostrar Hortifruti</button>
 
-            <div class="containerBuscaPorNome">
-                
-                <input type="text" placeholder="Nome do produto" class="campoBuscaPorNome">
-                <button class="estiloGeralBotoes estiloGeralBotoes--botaoBuscaPorNome">Buscar</button>
+        <h1>Shop now</h1>
 
-            </div>
-        </div>
     </header>
 
     <main>
-        <div class="containerListaProdutos" id="listProdutos">
-            <ul>
-                <!-- LISTA DE PRODUTOS -->
 
-            </ul>
-        </div>
+        <section class="containerFiltros">
+            <nav>
+                <ul>
+                    <li id="botaoTodos">Todos Produtos</li>
+                    <li id="botaoHortifruit">Hortifruit</li>
+                    <li id="botaoPanificadora">Panificadora</li>
+                    <li id="botaoLaticinios">Laticínios</li>
+                </ul>
+            </nav>
 
-        <div id="carrinho" class="containerCarrinho">
-            <ul>
-                <!-- ITENS ADICIONADOS AO CARRINHO -->
+            <form action="">
+                <input type="text" placeholder="Pesquisar por">
+                <span id="apagador">✖️</span>
+                <button><img src="src/img/search.png" alt=""></button>
+            </form>
+        </section>
 
-            </ul>
-
-            <div class="containerPrecoTotal">
-                <p>Preço total: R$<span id="precoTotal">00.00</span></p>
+        <section class="containerPrecoTotal">
+            <div class="card-aviso">
+                <div class="card-aviso--info">
+                    <img src="src/img/alert-circle.png" alt="">
+                    <h2>Valor total dos produtos da sessão selecionada</h2>
+                </div>
+                <span id="precoTotal"></span>
             </div>
-        </div>
+        </section>
+
+        <section class="areaDeCompra">
+            <section class="containerProdutos">
+                <article class="produto"><img src="./src/img/morango.png" alt="Morango 5kg">
+                    <h3>Morango 5kg</h3>
+                    <p>Hortifruit</p>
+                    <span>R$ 7.00</span>
+                    <button><img src="src/img/carrinho.png" alt=""></button>
+                </article>
+            </section>
+            <section class="carrinho carrinhoAberto">
+                <section class="carrinhoHeader">
+                    <h2>Carrinho</h2>
+                </section>
+                <div class="minimizador"></div>
+                <section class="carrinhoItens">
+                    <div class="item">
+                        <div class="picture">
+                            <img src="src/img/morango.png" alt="">
+                        </div>
+                        <div class="info">
+                            <h2>Black Hat</h2>
+                            <span>Hortifruit</span>
+                            <button>🗑️</button>
+                        </div>
+                        <div class="acoes">
+                            <div class="carrinhoItemQtArea">
+                                <button class="cart--item-qtmenos">-</button>
+                                <div class="carrinhoItemQt">1</div>
+                                <button class="cart--item-qtmais">+</button>
+                            </div>
+                            <span>R$ 100.00</span>
+
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="picture">
+                            <img src="src/img/morango.png" alt="">
+                        </div>
+                        <div class="info">
+                            <h2>Black Hat</h2>
+                            <span>Hortifruit</span>
+                            <button>🗑️</button>
+                        </div>
+                        <div class="acoes">
+                            <div class="carrinhoItemQtArea">
+                                <button class="cart--item-qtmenos">-</button>
+                                <div class="carrinhoItemQt">1</div>
+                                <button class="cart--item-qtmais">+</button>
+                            </div>
+                            <span>R$ 100.00</span>
+
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="picture">
+                            <img src="src/img/banana.png" alt="">
+                        </div>
+                        <div class="info">
+                            <h2>Yorgut de Morango</h2>
+                            <span>Hortifruit</span>
+                            <button>🗑️</button>
+                        </div>
+                        <div class="acoes">
+                            <div class="carrinhoItemQtArea">
+                                <button class="cart--item-qtmenos">-</button>
+                                <div class="carrinhoItemQt">1</div>
+                                <button class="cart--item-qtmais">+</button>
+                            </div>
+                            <span>R$ 100.00</span>
+
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="picture">
+                            <img src="src/img/morango.png" alt="">
+                        </div>
+                        <div class="info">
+                            <h2>Yorgut de Morango</h2>
+                            <span>Hortifruit</span>
+                            <button>🗑️</button>
+                        </div>
+                        <div class="acoes">
+                            <div class="carrinhoItemQtArea">
+                                <button class="cart--item-qtmenos">-</button>
+                                <div class="carrinhoItemQt">1</div>
+                                <button class="cart--item-qtmais">+</button>
+                            </div>
+                            <span>R$ 100.00</span>
+
+                        </div>
+                    </div>
+
+
+                </section>
+                <section class="carrinhoInfo">
+                    <div class="amount">
+                        <span class="first">Quantidade:</span>
+                        <span class="second">3</span>
+                    </div>
+                    <div class="total">
+                        <span class="first">Total:</span>
+                        <span class="second">R$ 200,00</span>
+                    </div>
+                </section>
+            </section>
+        </section>
+
+
+
     </main>
 
     <script src="src/js/dataProdutos.js"></script>
+    <script src="src/js/handlers.js"></script>
     <script src="src/js/script.js"></script>
 </body>
+
 </html>
