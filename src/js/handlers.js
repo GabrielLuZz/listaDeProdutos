@@ -63,10 +63,12 @@ const PesquisarProduto = (e) => {
     input.innerText = '';
 
     if (filtro.length > 0) {
-        const listaFiltrada = produtos.filter(({ secao, nome }) => {
+        const listaFiltrada = produtos.filter(({ secao, nome, categoria }) => {
             return secao.toLowerCase()
                 .includes(filtro.trim().toLowerCase()) ||
                 nome.toLowerCase()
+                .includes(filtro.trim().toLowerCase()) ||
+                categoria.toLocaleLowerCase()
                 .includes(filtro.trim().toLowerCase());
         })
 
@@ -82,6 +84,35 @@ const montarListaProdutos = (listaProdutos) => {
 
     precoTotal.innerText = `R$ ${calcularPrecoTotal(listaProdutos).toFixed(2)}`;
 
+    // <article class="produto">
+
+    //     <section class="top">
+    //         <img src="./src/img/banana.png" alt="Banana">
+    //     </section>
+
+    //     <section class="bottom">
+
+    //         <section class="left">
+    //             <h3>Banana</h3>
+    //             <p>Hortifruit</p>
+    //             <span>R$ 4.00</span>
+    //         </section>
+
+    //         <section class="right">
+    //             <ul>
+    //                 <li>vitamina</li>
+    //                 <li>vitamina</li>
+    //                 <li>vitamina</li>
+    //                 <li>vitamina</li>
+    //             </ul>
+    //             <button><img src="src/img/carrinho.png" alt="botão do carrinho"></button>
+    //         </section>
+
+    //     </section>
+
+
+    // </article>
+
     if (listaProdutos.length > 0) {
         containerProdutos.classList.remove('semResultado')
 
@@ -90,15 +121,24 @@ const montarListaProdutos = (listaProdutos) => {
         listaProdutos.forEach(produtoArray => {
             let produto = {...produtoArray };
             const card = document.createElement('article');
+            const top = document.createElement('section');
+            const bottom = document.createElement('section');
+            const bottomLeft = document.createElement('section');
+            const bottomRight = document.createElement('section');
+            const lista = document.createElement('ul');
             const img = document.createElement('img');
             const titulo = document.createElement('h3');
             const secao = document.createElement('p');
             const preco = document.createElement('span');
             const botaoCarrinho = document.createElement('button');
-            const imgCarrinho = document.createElement('img')
+            const imgCarrinho = document.createElement('img');
 
 
             card.classList.add('produto');
+            top.classList.add('top');
+            bottom.classList.add('bottom');
+            bottomLeft.classList.add('left');
+            bottomRight.classList.add('right');
             img.src = `${produto.img}`;
             img.alt = `${produto.nome}`;
             titulo.innerText = `${produto.nome}`;
@@ -106,15 +146,35 @@ const montarListaProdutos = (listaProdutos) => {
             preco.innerText = `R$ ${produto.preco.toFixed(2)}`;
             imgCarrinho.src = 'src/img/carrinho.png';
             imgCarrinho.alt = 'botão do carrinho';
+
             botaoCarrinho.appendChild(imgCarrinho)
 
-            botaoCarrinho.addEventListener('click', () => adicionarCarrinho(produto))
+            produto.componentes.forEach(componente => {
+                const item = document.createElement('li');
 
-            card.appendChild(img)
-            card.appendChild(titulo)
-            card.appendChild(secao)
-            card.appendChild(preco)
-            card.appendChild(botaoCarrinho)
+                item.innerText = componente;
+
+                lista.appendChild(item);
+            })
+
+            bottomLeft.appendChild(titulo)
+            bottomLeft.appendChild(secao)
+            bottomLeft.appendChild(preco)
+
+
+            bottomRight.appendChild(lista)
+            bottomRight.appendChild(botaoCarrinho)
+
+
+            top.appendChild(img)
+            bottom.appendChild(bottomLeft)
+            bottom.appendChild(bottomRight)
+
+            card.appendChild(top)
+            card.appendChild(bottom)
+
+
+            botaoCarrinho.addEventListener('click', () => adicionarCarrinho(produto))
 
             containerProdutos.appendChild(card)
         });
