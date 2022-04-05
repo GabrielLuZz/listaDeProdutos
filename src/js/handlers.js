@@ -1,3 +1,5 @@
+//variáveis
+
 const containerProdutos = document.querySelector('.containerProdutos');
 const input = document.querySelector('.containerFiltros input');
 const botaoPesquisar = document.querySelector('.containerFiltros button');
@@ -7,50 +9,19 @@ const botaoPanificadora = document.querySelector('#botaoPanificadora')
 const botaoLaticinios = document.querySelector('#botaoLaticinios')
 const precoTotal = document.querySelector('#precoTotal');
 const apagador = document.querySelector('#apagador');
+const areaCarrinho = document.querySelector('.carrinho');
+const minimizador = document.querySelector('.minimizador');
+const areaItens = document.querySelector('.carrinhoItens');
+const quantidadeCarrinho = document.querySelector('.amount .second');
+const totalCarrinho = document.querySelector('.total .second');
+const abrirCarrinho = document.querySelector('.abrir');
 
-const montarListaProdutos = (listaProdutos) => {
+const carrinho = [];
 
 
-    precoTotal.innerText = `R$ ${calcularPrecoTotal(listaProdutos).toFixed(2)}`;
 
-    if (listaProdutos.length > 0) {
-        containerProdutos.classList.remove('semResultado')
 
-        containerProdutos.innerText = '';
-
-        listaProdutos.forEach(produto => {
-            const card = document.createElement('article');
-            const img = document.createElement('img');
-            const titulo = document.createElement('h3');
-            const secao = document.createElement('p');
-            const preco = document.createElement('span');
-            const botaoCarrinho = document.createElement('button');
-            const imgCarrinho = document.createElement('img')
-
-            card.classList.add('produto');
-            img.src = `${produto.img}`;
-            img.alt = `${produto.nome}`;
-            titulo.innerText = `${produto.nome}`;
-            secao.innerText = `${produto.secao}`;
-            preco.innerText = `R$ ${produto.preco.toFixed(2)}`;
-            imgCarrinho.src = 'src/img/carrinho.png';
-            imgCarrinho.alt = 'botão do carrinho';
-            botaoCarrinho.appendChild(imgCarrinho)
-
-            card.appendChild(img)
-            card.appendChild(titulo)
-            card.appendChild(secao)
-            card.appendChild(preco)
-            card.appendChild(botaoCarrinho)
-
-            containerProdutos.appendChild(card)
-        });
-    } else {
-        containerProdutos.innerText = 'Sem resultados para esta pesquisa 😞';
-        containerProdutos.classList.add('semResultado')
-    }
-
-}
+//filtragem
 
 const filtrarPorTodos = () => {
     montarListaProdutos(produtos)
@@ -106,6 +77,54 @@ const PesquisarProduto = (e) => {
 
 }
 
+const montarListaProdutos = (listaProdutos) => {
+
+
+    precoTotal.innerText = `R$ ${calcularPrecoTotal(listaProdutos).toFixed(2)}`;
+
+    if (listaProdutos.length > 0) {
+        containerProdutos.classList.remove('semResultado')
+
+        containerProdutos.innerText = '';
+
+        listaProdutos.forEach(produtoArray => {
+            let produto = {...produtoArray };
+            const card = document.createElement('article');
+            const img = document.createElement('img');
+            const titulo = document.createElement('h3');
+            const secao = document.createElement('p');
+            const preco = document.createElement('span');
+            const botaoCarrinho = document.createElement('button');
+            const imgCarrinho = document.createElement('img')
+
+
+            card.classList.add('produto');
+            img.src = `${produto.img}`;
+            img.alt = `${produto.nome}`;
+            titulo.innerText = `${produto.nome}`;
+            secao.innerText = `${produto.secao}`;
+            preco.innerText = `R$ ${produto.preco.toFixed(2)}`;
+            imgCarrinho.src = 'src/img/carrinho.png';
+            imgCarrinho.alt = 'botão do carrinho';
+            botaoCarrinho.appendChild(imgCarrinho)
+
+            botaoCarrinho.addEventListener('click', () => adicionarCarrinho(produto))
+
+            card.appendChild(img)
+            card.appendChild(titulo)
+            card.appendChild(secao)
+            card.appendChild(preco)
+            card.appendChild(botaoCarrinho)
+
+            containerProdutos.appendChild(card)
+        });
+    } else {
+        containerProdutos.innerText = 'Sem resultados para esta pesquisa 😞';
+        containerProdutos.classList.add('semResultado')
+    }
+
+}
+
 const calcularPrecoTotal = (listaProdutos) => {
     const precoTotal = listaProdutos.reduce((acc, { preco }) => acc + preco, 0);
 
@@ -121,5 +140,116 @@ const selecionarSecao = (posicao) => {
     }
 
     secoes[posicao].classList.add('selected');
+
+}
+
+
+//carrinho
+
+const adicionarCarrinho = (produto) => {
+
+    if (carrinho.findIndex(item => item.id === produto.id) === -1) {
+        produto.noCarrinho = 0;
+        produto.noCarrinho++;
+        carrinho.push(produto)
+
+        atualizarCarrinho()
+    }
+}
+
+const removerCarrinho = (produto) => {
+    const index = carrinho.findIndex(item => item.id === produto.id);
+    carrinho[index].noCarrinho = 0;
+
+    carrinho.splice(index, 1)
+
+    atualizarCarrinho();
+}
+
+const incrementarNoCarrinho = (produto) => {
+    const index = carrinho.findIndex(item => item.id === produto.id);
+    carrinho[index].noCarrinho++;
+
+    atualizarCarrinho();
+
+}
+
+const diminuirNoCarrinho = (produto) => {
+    const index = carrinho.findIndex(item => item.id === produto.id);
+    carrinho[index].noCarrinho--;
+
+    if (carrinho[index].noCarrinho === 0) {
+        removerCarrinho(produto);
+    }
+
+    atualizarCarrinho();
+}
+
+const montarItensCarrinho = () => {
+    if (carrinho.length > 0) {
+
+        areaItens.innerText = '';
+
+        carrinho.forEach(produto => {
+            const item = document.createElement('div');
+
+
+            item.classList.add('item');
+
+            item.innerHTML = `
+                <div class="picture">
+                    <img src="${produto.img}" alt="${produto.nome}">
+                </div>
+                <div class="info">
+                    <h2>${produto.nome}</h2>
+                    <span>${produto.secao}</span>
+                    <button>🗑️</button>
+                </div>
+                <div class="acoes">
+                    <div class="carrinhoItemQtArea">
+                        <button class="cart--item-qtmenos">-</button>
+                        <div class="carrinhoItemQt">${produto.noCarrinho}</div>
+                        <button class="cart--item-qtmais">+</button>
+                    </div>
+                    <span>R$ ${produto.preco.toFixed(2)}</span>
+
+                </div>`;
+
+            item.querySelector('.info button').addEventListener('click', () => removerCarrinho(produto))
+
+            item.querySelector('.cart--item-qtmenos').addEventListener('click', () => diminuirNoCarrinho(produto));
+
+            item.querySelector('.cart--item-qtmais').addEventListener('click', () => incrementarNoCarrinho(produto))
+
+            areaItens.appendChild(item);
+        });
+    }
+}
+
+const atualizarCarrinho = () => {
+
+
+    if (carrinho.length > 0) {
+        areaCarrinho.classList.add('carrinhoAberto');
+        abrirCarrinho.classList.remove('aparece');
+    } else {
+        areaCarrinho.classList.remove('carrinhoAberto');
+    }
+
+    montarItensCarrinho()
+
+
+    let quantidade = carrinho.reduce((acc, { noCarrinho }) => acc + noCarrinho, 0);
+    quantidadeCarrinho.innerText = `${quantidade}`;
+
+    let total = carrinho.reduce((acc, { noCarrinho, preco }) => {
+        let precoTotal = noCarrinho * preco;
+
+        return acc + precoTotal;
+    }, 0);
+    totalCarrinho.innerText = `${total}`;
+
+
+
 
 }
